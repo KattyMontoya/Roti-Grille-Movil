@@ -1,0 +1,246 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Entretenimiento
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="resetGame()" *ngIf="off_game">
+        <ion-icon name="power" class="size-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-img">
+
+  <div class="ion-text-center ion-text-wrap padding-item" *ngIf="!off_game">
+    <h2>Bienvenido a la sección GAMER</h2>
+    <h3>¿Quiéres intentarlo?</h3>
+    <p>¡Selecciona un juego!</p>
+    <ion-progress-bar type="indeterminate" reversed="false" color="warning"></ion-progress-bar>
+  </div>
+  <br><br>
+
+  <ion-list class="" *ngIf="!off_game" hidden>
+    <ion-item>
+      <ion-label>
+        <!-- <p> -->
+        Seleccionar Juego:
+        <!-- </p> -->
+      </ion-label>
+      <ion-select #onSelect_value value="" okText="Aceptar" cancelText="Cancelar" (ionChange)="onSelect($event)">
+        <ion-select-option value="">Ninguno</ion-select-option>
+        <ion-select-option value="juego1">Número secreto</ion-select-option>
+        <ion-select-option value="juego2">Traga monedas</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+  <section *ngIf="!off_game">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-button mode="ios" expand="full" shape="round" color="dark" (click)="onSelectButton('juego1')">
+            Número secreto
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <!-- <br><br><br> -->
+
+      <ion-row>
+        <ion-col>
+          <section>
+            <img src="assets/palanca-de-mando.svg" alt="" class="size-img-control">
+          </section>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="10" offset="1">
+          <ion-button mode="ios" expand="full" shape="round" color="tertiary" (click)="onSelectButton('juego2')">
+            Traga monedas
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <!-- ================================================================================================= -->
+  <!-- NÚMERO SECRETO -->
+  <!-- ================================================================================================= -->
+
+  <section *ngIf="select_game === 'juego1'">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center ion-text-wrap">
+            <!-- <h2>GAMER</h2> -->
+            <h3>¡Adivina el número secreto!</h3>
+            <ion-card-content>
+              Ustede debe ingresar un número y presionar el botón adivinar. La aplicación le indicará si el número
+              secreto es menor o mayor que el número ingresado.
+              <!-- En esta sección usted prodrá visualizar una pequeña aplicación de entretenimiento. -->
+            </ion-card-content>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+    <div class="padding-item">
+
+      <section class="border-item">
+        <ion-input type="number" min="1" max="100" [(ngModel)]="num" placeholder="Introduce un número del 1 al 100"
+          (ionChange)="messageText( $event )">
+        </ion-input>
+      </section>
+    </div>
+    <!-- <br> -->
+
+    <ion-card mode="ios">
+      <ion-item button>
+        <p>El número secreto es{{ mayorMenor }}: {{ num }}</p>
+      </ion-item>
+    </ion-card>
+    <!-- <br> -->
+    <ion-text class="ion-text-center" *ngIf="text_msm">
+      <p>Preciona el botón "Adivinar"</p>
+    </ion-text>
+
+
+    <div class="padding-item">
+      <ion-button color="dark" expand="full" shape="round" mode="ios" (click)="compruebaNumero()" class="btn-size">
+        Adivinar
+      </ion-button>
+    </div>
+  </section>
+
+  <!-- <ion-button (click)="aleatorio()"> 
+    aleatorio
+  </ion-button> -->
+
+  <!-- ================================================================================================= -->
+  <!-- TRAGA MONEDAS -->
+  <!-- ================================================================================================= -->
+
+  <section *ngIf="select_game === 'juego2'">
+    <!-- <section> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center ion-text-wrap">
+            <!-- <h2>GAMER</h2> -->
+            <h3>¡Traga monedas!</h3>
+            <ion-card-content>
+              Conviértete en millonario, gira la máquina tragamonedas y se un campeón. Muestra 3 figuras exactamente
+              iguales para que seas el ganador. ¡Fíjate en los detalles!
+              <!-- En esta sección usted prodrá visualizar una pequeña aplicación de entretenimiento. -->
+            </ion-card-content>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <section>
+      <ion-progress-bar type="determinate" color="tertiary" buffer="0"></ion-progress-bar>
+      <!-- <ion-progress-bar type="indeterminate" reversed="true"></ion-progress-bar> -->
+      <ion-grid>
+        <ion-row>
+
+          <!-- Left -->
+          <ion-col size="4">
+            <div class="border-img ion-text-center">
+              <section *ngIf="start_game">
+                <img [src]="img_left[index_left].path" alt="" class="size-img">
+              </section>
+              <section *ngIf="!start_game">
+                <br>
+                <p><b>¿Apuestas?</b></p>
+              </section>
+            </div>
+          </ion-col>
+
+          <!-- Center -->
+          <ion-col size="4">
+            <div class="border-img ion-text-center">
+              <section *ngIf="start_game">
+                <img [src]="img_center[index_center].path" alt="" class="size-img">
+              </section>
+              <section *ngIf="!start_game">
+                <br>
+                <p><b>¿Apuestas?</b></p>
+              </section>
+            </div>
+          </ion-col>
+
+          <!-- Right -->
+          <ion-col size="4">
+            <div class="border-img ion-text-center">
+              <section *ngIf="start_game">
+                <img [src]="img_right[index_right].path" alt="" class="size-img">
+              </section>
+              <section *ngIf="!start_game">
+                <br>
+                <p><b>¿Apuestas?</b></p>
+              </section>
+            </div>
+          </ion-col>
+
+
+        </ion-row>
+      </ion-grid>
+      <ion-progress-bar type="determinate" color="tertiary" buffer="0" reversed="true"></ion-progress-bar>
+    </section>
+    <br>
+    <div class="padding-item">
+      <ion-button color="tertiary" expand="full" shape="round" mode="ios" (click)="onTragaMonedas()" class="btn-size">
+        {{ button_text }}
+      </ion-button>
+    </div>
+
+  </section>
+
+
+
+
+
+</ion-content>
+
+
+
+<ion-footer>
+  <!-- <ion-tabs> -->
+  <ion-tab-bar slot="bottom" color="dark">
+
+    <ion-tab-button routerLink="/promociones">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Promociones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/categories">
+      <ion-icon mode="ios" name="restaurant"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/pedidos">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/sugerencias">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button selected routerLink="/juegos">
+      <ion-icon name="logo-playstation"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  <!-- </ion-tabs> -->
+</ion-footer>

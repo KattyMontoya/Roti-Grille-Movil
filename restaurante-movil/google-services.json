@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "723796436300",
+    "firebase_url": "https://roti-grille.firebaseio.com",
+    "project_id": "roti-grille",
+    "storage_bucket": "roti-grille.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723796436300:android:de94e45004a8c358c6dbe9",
+        "android_client_info": {
+          "package_name": "com.restaurant.single"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723796436300-oqdso32icd1eca00pip1ef19ggml7rd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGeE084AxaIfxABfBdGNKZjTmD0RlX_Oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723796436300-oqdso32icd1eca00pip1ef19ggml7rd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

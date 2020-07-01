@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Detalle de productos a ordenar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="!dataPedido">
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center ion-text-wrap">
+          <h3>No existe productos agregados</h3>
+          <ion-card-content>
+            Para que pueda visualizar información en esta sección es necesario agregar productos.
+          </ion-card-content>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <section *ngIf="dataPedido">
+    <section *ngIf="dataPedido.productos">
+      <section *ngFor="let product of dataPedido.productos; let i = index">
+
+        <ion-card button mode="">
+          <section (click)="openModalProduct(product, i)">
+            <ion-item>
+              <ion-badge slot="" color="light" mode="ios">{{ product.cantidad }}</ion-badge>
+              &nbsp;
+              <ion-label slot="" class="ion-text-capitalize ion-text-wrap">{{ product.nombre }}</ion-label>
+              <ion-button color="dark" fill="outline">$ {{ (product.cantidad * product.precio).toFixed(2) }}</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              <p class="ion-text-capitalize">
+                {{ product.detalle }}
+              </p>
+              <b>Observación:</b>
+              {{ product.observacion }}
+            </ion-card-content>
+          </section>
+        </ion-card>
+
+      </section>
+    </section>
+  </section>
+
+
+  <ion-list *ngIf="dataPedido">
+    <!-- <ion-item></ion-item> -->
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-end">
+          <b> Subtotal: </b>
+        </ion-col>
+        <ion-col size="6">
+          $ {{ dataPedido.subtotal }}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="2"></ion-col>
+        <ion-col size="4" class="ion-text-end">
+          <b> I.V.A. (12%): </b>
+        </ion-col>
+        <ion-col size="6">
+          $ {{ dataPedido.iva }}
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-end">
+          <b> Total: </b>
+        </ion-col>
+        <ion-col size="6">
+          $ {{ dataPedido.total }}
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+
+
+
+    <!-- <ion-item class="ion-no-padding" lines="none">
+      <ion-label class="ion-text-center">
+        <b> Subtotal: </b>
+        $ {{ dataPedido.subtotal }}
+      </ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item class="ion-no-padding" lines="none">
+      <ion-label class="ion-text-center">
+        <b> I.V.A. (12%): </b>
+        $ {{ dataPedido.iva }}
+      </ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item>
+      <ion-label class="ion-text-center">
+        <b> Total: </b>
+        $ {{ dataPedido.total }}
+      </ion-label>
+    </ion-item> -->
+
+    <ion-item button (click)="alertConfirm_remove()">
+      <ion-label class="ion-text-center" color="danger">
+        Remover orden
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-grid fixed *ngIf="dataPedido">
+    <ion-row>
+      <ion-col>
+        <ion-button color="success" expand="full" mode="ios" class="" (click)="validarDatos()">
+          Realizar pedido
+          <!-- <ion-icon slot="end" name="arrow-forward" mode="ios"></ion-icon> -->
+          <!-- <ion-icon slot="end" name="arrow-forward"></ion-icon> -->
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+
+
+
+
+<ion-footer>
+  <!-- <ion-tabs> -->
+  <ion-tab-bar slot="bottom" color="dark">
+
+    <ion-tab-button routerLink="/promociones">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Promociones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/categories">
+      <ion-icon mode="ios" name="restaurant"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button selected routerLink="/pedidos">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/sugerencias">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/juegos">
+      <ion-icon name="logo-playstation"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  <!-- </ion-tabs> -->
+</ion-footer>

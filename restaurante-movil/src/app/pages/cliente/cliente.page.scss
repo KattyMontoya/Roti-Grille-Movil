@@ -1,0 +1,39 @@
+.icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.border-item {
+  border: solid 1px #607d8b;
+  border-radius: 10px;
+}
+
+.icon-position {
+  margin: 0%;
+  padding-top: 20px;
+}
+
+.err {
+  font-size: x-small;
+  color: red;
+}
+
+// ==================================================================== //
+
+.icon-send {
+  height: 40px;
+}
+
+.border {
+  border: 0px solid black;
+  //margin: 0%;
+  //padding-top: 20px;
+}
+
+.col-send {
+  //border: 1px solid black;
+  margin: 0px;
+  padding-top: 12px;
+}

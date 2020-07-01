@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Promociones de hoy
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="!dataPromociones">
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center ion-text-wrap">
+          <h3>No existe promociones registradas</h3>
+          <ion-card-content>
+            En esta sección usted podra visualizar información de promociones segun fechas especiales o feriados.
+          </ion-card-content>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <section *ngIf="dataPromociones">
+    <section *ngFor="let promocion of dataPromociones">
+      <ion-card button mode="" (click)="openModalProduct(promocion)">
+        <section>
+          <img [src]="promocion.imagen" alt="" srcset="">
+        </section>
+      </ion-card>
+    </section>
+  </section>
+
+
+
+</ion-content>
+
+<ion-footer>
+  <!-- <ion-tabs> -->
+  <ion-tab-bar slot="bottom" color="dark">
+
+    <ion-tab-button selected routerLink="/promociones">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Promociones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/categories">
+      <ion-icon mode="ios" name="restaurant"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/pedidos">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/sugerencias">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/juegos">
+      <ion-icon name="logo-playstation"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  <!-- </ion-tabs> -->
+</ion-footer>

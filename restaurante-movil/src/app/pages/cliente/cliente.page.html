@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()" fill="clear">
+        <ion-icon class="icon-size" mode="" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+    <ion-title class="">
+      Datos Cliente
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label slot="">¿Necesita factura?</ion-label>
+      <ion-checkbox mode="ios" color="success" slot="end" (ionChange)="onCheck($event)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" class="border">
+        <!-- (change) sirve para empezar la busqueda con la tecla enter, **$event.target.value** toma el valor ingresado  -->
+        <ion-searchbar #searchBar inputmode="numeric" type="text" mode="ios" [disabled]='searchButton'
+          class="border" animated placeholder="N° Cédula" [(ngModel)]="searchInput" (ionChange)="vacioSearch()"
+          (change)="buscarCliente_Online($event.target.value.toUpperCase())">
+        </ion-searchbar>
+      </ion-col>
+
+      <ion-col size="2" class="col-send">
+        <ion-button [disabled]='searchButton' class="icon-send" color="primary">
+          <ion-icon name="search"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <!-- fill="outline" -->
+      <ion-col size="2" class="col-send">
+        <ion-button [disabled]='!searchButton' class="icon-send" color="danger" (click)="clearData()">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid [hidden]='searchButton'>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center ion-text-wrap">
+          <h3>¿A nombre de quién vas a ordenar?</h3>
+          <ion-card-content class="">
+            <p>Ingresa tu número de cédula para registrarte o para ordenar si ya eres cliente.</p>
+          </ion-card-content>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <section [hidden]='!form_hidden'>
+
+    <form [formGroup]="myForm" novalidate>
+      <ion-list class="ion-padding">
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">Nombre:</ion-label>
+          <ion-input inputmode="text" type="text" autocapitalize="on" class="form-control"
+            [ngClass]="{'is-invalid': !myForm.get('nombre').valid}" formControlName="nombre" clear-input required>
+          </ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['nombre'].errors?.required && (myForm.controls['nombre'].dirty || myForm.controls['nombre'].touched)"
+          class="err">
+          *Campo requerido
+        </span>
+        <span *ngIf="!myForm.controls['nombre'].errors?.required && myForm.controls['nombre'].invalid" class="err">
+          *Caracteres invalidos
+        </span>
+        <br>
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">Apellido:</ion-label>
+          <ion-input inputmode="text" type="text" class="form-control"
+            [ngClass]="{'is-invalid': !myForm.get('apellido').valid}" formControlName="apellido" clear-input required>
+          </ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['apellido'].errors?.required && (myForm.controls['apellido'].dirty || myForm.controls['apellido'].touched) "
+          class="err">
+          *Campo requerido
+        </span>
+        <span *ngIf="!myForm.controls['apellido'].errors?.required && myForm.controls['apellido'].invalid" class="err">
+          *Caracteres invalidos
+        </span>
+        <br>
+
+
+
+        <!-- <section *ngIf="factura_check"> -->
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">Cédula de Identidad:</ion-label>
+          <ion-input inputmode="numeric" type="text" maxlength="10" class="form-control"
+            [ngClass]="{'is-invalid': myForm.get('cedula').valid}" formControlName="cedula" clear-input></ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['cedula'].errors?.required && (myForm.controls['cedula'].dirty || myForm.controls['cedula'].touched) "
+          class="err">
+          *Campo requerido
+        </span>
+        <span *ngIf="(myForm.controls['cedula'].errors?.minlength) " class="err">
+          *Son mínimo 10 dígitos
+        </span>
+        <span *ngIf="(myForm.controls['cedula'].errors?.maxlength) " class="err">
+          *Son máximo 10 dígitos
+        </span>
+        <span id="salida" class="err"></span>
+        <br>
+
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">Contacto:</ion-label>
+          <ion-input inputmode="numeric" type="text" maxlength="10" class="form-control"
+            [ngClass]="{'is-invalid': !myForm.get('contacto').valid}" formControlName="contacto" clear-input required>
+          </ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['contacto'].errors?.required && (myForm.controls['contacto'].dirty || myForm.controls['contacto'].touched)"
+          class="err">
+          *Campo requerido
+        </span>
+        <span *ngIf="(myForm.controls['contacto'].errors?.minlength) " class="err">
+          *Son mínimo 10 dígitos
+        </span>
+        <span *ngIf="(myForm.controls['contacto'].errors?.maxlength) " class="err">
+          *Son máximo 10 dígitos
+        </span>
+        <br>
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">Dirección:</ion-label>
+          <ion-input inputmode="text" type="text" class="form-control"
+            [ngClass]="{'is-invalid': !myForm.get('direccion').valid}" formControlName="direccion" clear-input required>
+          </ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['direccion'].errors?.required && (myForm.controls['direccion'].dirty || myForm.controls['direccion'].touched)"
+          class="err">
+          *Campo requerido
+        </span>
+        <br>
+
+        <ion-item class="border-item">
+          <ion-label position="stacked">E-mail:</ion-label>
+          <ion-input inputmode="email" type="email" class="form-control"
+            [ngClass]="{'is-invalid': !myForm.get('email').valid}" formControlName="email" clear-input required>
+          </ion-input>
+        </ion-item>
+        <span
+          *ngIf="myForm.controls['email'].errors?.required && (myForm.controls['email'].dirty || myForm.controls['email'].touched) "
+          class="err">
+          *Campo requerido
+        </span>
+        <span *ngIf="(myForm.controls['email'].errors?.email) " class="err">
+          *No corresponde a un formato válido de email
+        </span>
+        <!-- <br> -->
+
+
+        <!-- </section> -->
+
+      </ion-list>
+    </form>
+
+
+    <ion-button [hidden]='!button_hidden' (click)="saveForm()" expand="full" color="dark" [disabled]="!myForm.valid">
+      Agregar
+    </ion-button>
+
+    <ion-button [hidden]='button_hidden' (click)="saveForm()" expand="full" color="dark" [disabled]="!myForm.valid">
+      Registrar y Agregar
+    </ion-button>
+  </section>
+
+
+
+</ion-content>

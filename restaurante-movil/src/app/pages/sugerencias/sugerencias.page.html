@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Quejas o sugerencias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center ion-text-wrap">
+          <ion-card-content>
+            Si tiene alguna queja o sugerencia por nuestro servicio, no dude en registrarla. Su aporte nos ayuda a
+            mejorar.
+          </ion-card-content>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <section class="ion-padding">
+
+    <ion-list>
+      <ion-item class="border-item">
+        <ion-label>Seleccione:</ion-label>
+        <ion-select #onSelected value="" okText="Aceptar" cancelText="Cancelar" (ionChange)="onSelect($event)">
+          <ion-select-option value="">Ninguno</ion-select-option>
+
+          <section>
+            <ion-select-option value="queja">Queja</ion-select-option>
+            <ion-select-option value="sugerencia">Sugerencia</ion-select-option>
+          </section>
+
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <br>
+
+    <ion-list>
+      <ion-item class="border-item">
+        <ion-label position="stacked">Detalle:</ion-label>
+        <ion-textarea inputmode="text" type="text" name="detalle" clear-input required [(ngModel)]="detalle">
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <br>
+
+    <ion-button (click)="sendData()" expand="full" color="dark" [disabled]="tipo === '' || detalle === ''">
+      Enviar
+    </ion-button>
+
+  </section>
+
+</ion-content>
+
+
+<ion-footer>
+  <!-- <ion-tabs> -->
+  <ion-tab-bar slot="bottom" color="dark">
+
+    <ion-tab-button routerLink="/promociones">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Promociones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/categories">
+      <ion-icon mode="ios" name="restaurant"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/pedidos">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button selected routerLink="/sugerencias">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/juegos">
+      <ion-icon name="logo-playstation"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  <!-- </ion-tabs> -->
+</ion-footer>

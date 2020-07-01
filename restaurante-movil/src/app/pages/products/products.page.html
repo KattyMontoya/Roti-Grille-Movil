@@ -1,0 +1,83 @@
+<ion-fab vertical="top" horizontal="start" slot="fixed">
+  <ion-fab-button color="light" size="small" mode="ios" translucent="true" (click)="onBack()">
+    <ion-icon name="arrow-round-back"></ion-icon>
+    <!-- <ion-label class="ion-text-capitalize"><b>Atrás</b></ion-label> -->
+  </ion-fab-button>
+</ion-fab>
+
+<ion-content>
+
+  <!-- <section *ngIf="imagen_categoria && nombre_categoria">
+    <ion-slides mode="ios">
+      <ion-slide>
+        <div>
+          <img class="img-ad" [src]="imagen_categoria">
+        </div>
+        <div class="slide-title ion-text-capitalize">
+          <h3 [innerHTML]="nombre_categoria"></h3>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </section> -->
+
+  <section *ngIf="imagen_categoria && nombre_categoria">
+    <!-- <ion-slides mode="ios">
+      <ion-slide> -->
+    <div>
+      <img class="img-ad" [src]="imagen_categoria">
+    </div>
+    <div class="slide-title ion-text-capitalize ion-text-center">
+      <h3 [innerHTML]="nombre_categoria"></h3>
+    </div>
+    <!-- </ion-slide>
+    </ion-slides> -->
+  </section>
+
+
+  <section>
+    <ion-searchbar slot="end" mode="ios" animated (ionChange)="buscar( $event )" placeholder="Buscar"></ion-searchbar>
+  </section>
+
+
+  <section *ngIf="dataProducts">
+    <section *ngFor="let product of dataProducts | filtroProducto: textoBuscar; let i = index">
+      <ion-card button mode="ios">
+
+        <section (click)="openModalProduct(product)">
+          <ion-item>
+            <ion-label slot="" class="ion-text-capitalize ion-text-wrap">{{ product.nombre }}</ion-label>
+            <!-- <section slot="" > -->
+            <img [src]="product.imagen" name="" class="img-size">
+            <!-- </section> -->
+          </ion-item>
+
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3">
+                  <ion-button color="dark" fill="outline">$ {{ product.precio }}</ion-button>
+                </ion-col>
+                <ion-col size="1"></ion-col>
+                <ion-col size="8">
+                  <ion-label class="ion-text-capitalize">
+                    {{ product.detalle }}
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </section>
+
+      </ion-card>
+    </section>
+  </section>
+
+
+</ion-content>
+
+<ion-footer *ngIf="dataPedido">
+  <ion-button color="success" expand="full" mode="ios" class="" (click)="onPedido()">
+    Ver carrito
+    <ion-icon slot="end" name="cart"></ion-icon>
+  </ion-button>
+</ion-footer>

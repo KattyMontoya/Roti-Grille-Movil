@@ -1,0 +1,88 @@
+<!-- <ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="ion-text-center">
+      Lista de productos
+    </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+
+  <section *ngIf="dataSlides">
+    <ion-slides pager="true" mode="ios" [options]="slideOpts">
+      <ion-slide *ngFor="let slide of dataSlides">
+        <div>
+          <img class="img-ad" [src]="slide.imagen">
+        </div>
+        <div class="slide-title ion-text-capitalize">
+          <h3 [innerHTML]="slide.nombre"></h3>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </section>
+
+  <section>
+    <ion-searchbar slot="end" mode="ios" animated (ionChange)="buscar( $event )" placeholder="Buscar"></ion-searchbar>
+  </section>
+
+  <section *ngIf="dataCategories">
+    <section *ngFor="let categorie of dataCategories | filtroCategoria: textoBuscar; let i = index">
+      <ion-card button mode="ios">
+
+        <section [routerLink]="['/products', categorie.id, categorie.imagen, categorie.nombre]">
+          <ion-item>
+            <section slot="start" class="img-size">
+              <img [src]="categorie.imagen" name="attach">
+            </section>
+
+            <ion-label class="ion-text-capitalize">{{ categorie.nombre }}</ion-label>
+            <!-- <ion-button color="dark" fill="outline" slot="end">Ver</ion-button> -->
+          </ion-item>
+          <ion-card-content>
+            <ion-label class="">
+              <!-- Presiona para pedir {{ categorie.nombre }} -->
+              Presione para ver más...
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </ion-label>
+          </ion-card-content>
+        </section>
+
+      </ion-card>
+    </section>
+  </section>
+
+</ion-content>
+
+
+<ion-footer>
+  <!-- <ion-tabs> -->
+  <ion-tab-bar slot="bottom" color="dark">
+
+    <ion-tab-button routerLink="/promociones">
+      <ion-icon name="clipboard"></ion-icon>
+      <ion-label>Promociones</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button selected routerLink="/categories">
+      <ion-icon mode="ios" name="restaurant"></ion-icon>
+      <ion-label>Productos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/pedidos">
+      <ion-icon name="cart"></ion-icon>
+      <ion-label>Pedidos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/sugerencias">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label>Sugerencias</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/juegos">
+      <ion-icon name="logo-playstation"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+  <!-- </ion-tabs> -->
+</ion-footer>
