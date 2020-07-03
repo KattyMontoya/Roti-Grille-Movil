@@ -274,7 +274,8 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <ion-button color="primary" expand="full" mode="ios" class="" (click)="addProduct()">
+        <ion-button color="primary" expand="full" mode="ios" class="" (click)="addProduct()"
+          [disabled]="ingrediente_control">
           Añadir
           <ion-icon slot="end" name="add"></ion-icon>
           <!-- <ion-icon slot="end" name="arrow-forward"></ion-icon> -->
@@ -289,7 +290,8 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col>
-        <ion-button color="tertiary" expand="full" mode="ios" class="" (click)="editProduct()">
+        <ion-button color="tertiary" expand="full" mode="ios" class="" (click)="editProduct()"
+          [disabled]="ingrediente_control">
           <ion-icon mode="ios" slot="start" name="create"></ion-icon>
           Editar
           <!-- <ion-icon slot="end" name="arrow-forward"></ion-icon> -->

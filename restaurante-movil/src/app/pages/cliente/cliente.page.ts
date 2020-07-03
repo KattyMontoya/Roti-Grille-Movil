@@ -250,7 +250,7 @@ export class ClientePage implements OnInit {
   async mensajeExito() {
     const toast = await this.toastCtrl.create({
       header: 'Cliente agregado exitosamente',
-      message: 'Ahora usted puede realizar su ordenar.',
+      message: 'Ahora usted puede puede ordenar.',
       position: 'bottom',
       showCloseButton: true,
       closeButtonText: 'Cerrar',

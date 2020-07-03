@@ -26,7 +26,7 @@ export class ProductModalPage implements OnInit {
 
 
 
-  id_caregoria_bebidas: string = 'e9skaVDYzcyCtz1tr7GN';
+  id_caregoria_bebidas: string = 'AHQ0xbTNrpOooaB7BEJD';
   id_agua: string = 'YUjlfGFzxnj8WfiJxS8P';
   observacion: string = '';
   cantidad: number = 1;
@@ -66,6 +66,8 @@ export class ProductModalPage implements OnInit {
   dataIngredites: RecetaI[];
   no_deseo: any = [];
   deseo_bebida: any = [];
+
+  ingrediente_control: boolean = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -128,6 +130,7 @@ export class ProductModalPage implements OnInit {
     this.ingredientesService.getRecetas(this.dataProduct.id).subscribe(data => {
       this.dataIngredites = data;
       console.log('Ingredientes:', this.dataIngredites);
+      console.log('Ingredientes:', this.dataIngredites.length);
     });
   }
 
@@ -208,7 +211,7 @@ export class ProductModalPage implements OnInit {
   }
 
 
-  async  firstProduct() {
+  async firstProduct() {
     this.dataAddPedido.fecha = Date.now();
     const uid_mesa = localStorage.getItem('uid_mesa');
     this.dataAddPedido.uid_mesa = uid_mesa ? uid_mesa : '';
@@ -229,7 +232,7 @@ export class ProductModalPage implements OnInit {
       console.log('Pedido Add Successful...');
 
       setTimeout(() => {
-        const msg = 'Producto agregado exitosamente..!!!';
+        const msg = 'Producto agregado exitosamente.';
         this.toastAddProduct(msg);
         this.closeModal();
       }, 2000);
@@ -255,7 +258,7 @@ export class ProductModalPage implements OnInit {
       console.log('Pedido Add Successful...');
 
       setTimeout(() => {
-        const msg = 'Producto agregado exitosamente..!!!';
+        const msg = 'Producto agregado exitosamente.';
         this.toastAddProduct(msg);
         this.closeModal();
       }, 2000);
@@ -406,7 +409,7 @@ export class ProductModalPage implements OnInit {
       console.log('Pedido Add Successful...');
 
       setTimeout(() => {
-        const msg = 'Producto modificado exitosamente..!!!';
+        const msg = 'Producto modificado exitosamente.';
         this.toastAddProduct(msg);
         this.closeModal();
       }, 2000);
@@ -448,7 +451,7 @@ export class ProductModalPage implements OnInit {
       console.log('Pedido Add Successful...');
 
       setTimeout(() => {
-        const msg = 'Producto eliminado exitosamente..!!!';
+        const msg = 'Producto eliminado exitosamente.';
         this.toastAddProduct(msg);
         this.closeModal();
       }, 2000);
@@ -587,6 +590,14 @@ export class ProductModalPage implements OnInit {
     }
     console.log('NO DESEOOOOOOO:', this.no_deseo);
     // console.log('Factura:', this.factura_check.toString());
+    if (this.dataIngredites.length === this.no_deseo.length) {
+      this.ingrediente_control = true;
+      const msg = 'Debe solicitar al menos un ingrediente para ordenar este producto.';
+      this.toastAddProduct(msg);
+    } else {
+      this.ingrediente_control = false;
+    }
+    console.log('Ingredientes control:', this.ingrediente_control);
   }
 
 

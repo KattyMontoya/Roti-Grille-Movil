@@ -127,7 +127,7 @@ export class PedidosPage implements OnInit {
       this.dataPedido.pedido = Math.floor(((Math.random() * 45) + 5) + ((Math.random() * 40) + 10));
 
       this.pedidosService.postPedido(this.dataPedido).then(() => {
-        console.log('Place Order Successful...!!!');
+        console.log('Place Order Successful...');
         // this.postCliente();
         this.updateCliente();
         setTimeout(() => {
@@ -147,7 +147,7 @@ export class PedidosPage implements OnInit {
       this.dataPedido.pedido = Math.floor(((Math.random() * 45) + 5) + ((Math.random() * 40) + 10));
 
       this.pedidosService.postPedido(this.dataPedido).then(() => {
-        console.log('Place Order Successful...!!!');
+        console.log('Place Order Successful...');
         this.postCliente();
         // setTimeout(() => {
         //   this.clearStorage();
@@ -170,7 +170,7 @@ export class PedidosPage implements OnInit {
 
   async postCliente() {
     await this.clienteService.postCliente(this.dataCliente).then(() => {
-      console.log('Cliente Successful...!!!');
+      console.log('Cliente Successful...');
 
       setTimeout(() => {
         this.clearStorage();
@@ -186,7 +186,7 @@ export class PedidosPage implements OnInit {
 
   async updateCliente() {
     await this.clienteService.updateCliente(this.dataCliente.id, this.dataCliente).then(() => {
-      console.log('Cliente update Successful...!!!');
+      console.log('Cliente update Successful...');
     }).catch(error => console.log('Error cliente:', error));
   }
 
@@ -256,7 +256,7 @@ export class PedidosPage implements OnInit {
 
   async toastRemove_order() {
     const toast = await this.toastCtrl.create({
-      message: '¡Todo su pedido fué eliminado!',
+      message: '¡Todo su pedido fue eliminado!',
       position: 'bottom',
       mode: 'ios',
       showCloseButton: true,
